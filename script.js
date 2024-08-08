@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
             totalMark
         };
 
-        fetch('https://script.google.com/macros/s/AKfycbxuE5Gk8z_EQGLOZhjLBKFInvmTEBzboe7KTsENar3bxtVFbVOcE4zmgiV0JkLnv1ADQg/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbzqHzvQqFPFruoJ3Db8EibgP1ybxNgweSwCth_qwlogAdh7F_gb762PmsveX4XDKQncUQ/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
