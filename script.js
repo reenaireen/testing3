@@ -94,13 +94,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const totalMark = totalMarkInput.value;
 
         const data = {
-            juryName,
-            groupName,
+            juryname,
+            groupname,
             criteria,
             totalMark
         };
 
-        fetch('https://script.google.com/macros/s/AKfycbzqHzvQqFPFruoJ3Db8EibgP1ybxNgweSwCth_qwlogAdh7F_gb762PmsveX4XDKQncUQ/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbw11I4X_471BV3YOY15p4aO2fcSCsMMaE4jtl3ZskLZ4BqJFECqVTOWAAuqmhbVmN3apA/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
