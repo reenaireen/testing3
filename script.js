@@ -99,7 +99,7 @@ function sendDataToGoogleSheets() {
         totalMark
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbwj5O6ks9lQhtG5gTg8pK-DD-jEqfLIZYMYRDzZ6v21szY70SriR0W3u7KdWHTSWXcG0g/exec', {
+    fetch('https://script.google.com/macros/s/AKfycby3-o4a9_r5iOM2-3tTLDa7eOzD-3EzdJLkd3T2t77oJjO0ez8WP1X-8DBJWDApOKGs/exec', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
