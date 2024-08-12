@@ -82,41 +82,39 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
-    function sendDataToGoogleSheets() {
-        const juryName = document.getElementById('jury-name').value;
-        const groupName = document.getElementById('group').value;
-        const criteria = [];
-        for (let i = 1; i <= 6; i++) {
-            const selectedRadio = document.querySelector(`input[name="criteria${i}"]:checked`);
-            criteria.push(selectedRadio ? parseInt(selectedRadio.value) : 0);
-        }
-        const totalMark = totalMarkInput.value;
-
-        const data = {
-            juryname,
-            groupname,
-            criteria,
-            totalMark
-        };
-
-        fetch('https://script.google.com/macros/s/AKfycbzB11NH0iDYRQvIdr0EqLjtpmAIF5yVRiEhUzrGklsWnP2s84e26p1TppaOtUXu65aAmQ/exec', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                alert('Data submitted successfully!');
-            } else {
-                alert('Failed to submit data.');
-            }
-        })
-        .catch(error => {
-            alert('Error submitting data: ' + error.message);
-        });
+function sendDataToGoogleSheets() {
+    const juryName = document.getElementById('jury-name').value;
+    const groupName = document.getElementById('group').value;
+    const criteria = [];
+    for (let i = 1; i <= 6; i++) {
+        const selectedRadio = document.querySelector(`input[name="criteria${i}"]:checked`);
+        criteria.push(selectedRadio ? parseInt(selectedRadio.value) : 0);
     }
-});
+    const totalMark = document.getElementById('total-mark').value;
+
+    const data = {
+        juryName,
+        groupName,
+        criteria,
+        totalMark
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycbyB7JB5dR2PwkYNMKVm9wT8bM70K95NaJ3o-I0eVgsky8UAAHGD_CTNomEqG1rGtdz0Ow/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.result === 'success') {
+            alert('Data submitted successfully!');
+        } else {
+            alert('Failed to submit data.');
+        }
+    })
+    .catch(error => {
+        alert('Error submitting data: ' + error.message);
+    });
+}
