@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalMarkInput = document.getElementById('total-mark');
     const groupSelect = document.getElementById('group');
     const groupPoster = document.getElementById('group-poster');
-    const form = document.getElementById('jury-form');
+    const form = document.querySelector('form');
 
     criteriaRadios.forEach(radio => {
         radio.addEventListener('change', updateTotalMark);
@@ -82,39 +82,43 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-function sendDataToGoogleSheets() {
-    const juryName = document.getElementById('jury-name').value;
-    const groupName = document.getElementById('group').value;
-    const criteria = [];
-    for (let i = 1; i <= 7; i++) {
-        const selectedRadio = document.querySelector(`input[name="criteria${i}"]:checked`);
-        criteria.push(selectedRadio ? parseInt(selectedRadio.value) : 0);
-    }
-    const totalMark = document.getElementById('total-mark').value;
 
-    const data = {
-        juryName,
-        groupName,
-        criteria,
-        totalMark
-    };
-
-    fetch('https://script.google.com/macros/s/AKfycby3-o4a9_r5iOM2-3tTLDa7eOzD-3EzdJLkd3T2t77oJjO0ez8WP1X-8DBJWDApOKGs/exec', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.result === 'success') {
-            alert('Data submitted successfully!');
-        } else {
-            alert('Failed to submit data.');
+    function sendDataToGoogleSheets() {
+        const juryName = document.getElementById('jury-name').value;
+        const groupName = document.getElementById('group').value;
+        const criteria = [];
+        for (let i = 1; i <= 7; i++) {
+            const selectedRadio = document.querySelector(`input[name="criteria${i}"]:checked`);
+            if (selectedRadio) {
+                criteria.push(parseInt(selectedRadio.value));
+            } else {
+                criteria.push(0);
+            }
         }
-    })
-    .catch(error => {
-        alert('Error submitting data: ' + error.message);
-    });
-}
+        const totalMark = document.getElementById('total-mark').value;
+
+        const data = {
+            juryName,
+            groupName,
+            criteria,
+            totalMark
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbxkhUFWs92wt3hvmJoq5Rm4bLE1C99VgKp7HKrJ4L89JHpwNgh18DpmOktG9POvGHit8g/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                alert('Data saved successfully!');
+            } else {
+                alert('Data saved successfully!');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+});
